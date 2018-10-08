@@ -1,0 +1,222 @@
+.box {
+    height: 100px;
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 0 20px;
+    line-height: 100px;
+    font-size: 40px;
+    text-align: center;
+    background: #ccc;
+}
+
+/* 倾斜动画 */
+.skew-l, .skew-r, .skew-tl-l, .skew-bl-l {
+    transition: all 0.4s
+}
+
+.skew-l:hover {
+    transform: skew(40deg)
+}
+
+.skew-r:hover {
+    transform: skew(-40deg)
+}
+
+/* ==== 背景颜色动画 ====*/
+/* 设置所有伪类的父元素 position */
+.fade, .fade-mid, .fade-m-in, .fade-left, .bounce-top, .overline-left, .overline-m {
+    position: relative;
+}
+
+.fade:before, .fade-mid:before, .fade-m-in:before, .fade-m-in:after, .fade-left:before, .bounce-top:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: yellow;
+    /* z-index: -1; */
+    opacity: 0;
+    transition: all 0.3s
+}
+
+.fade:hover:before {
+    opacity: .8;
+}
+
+/* 中间 -> 上下两边 */
+.fade-mid:before {
+    transform: scaleY(0)
+}
+
+.fade-mid:hover:before {
+    transform: scaleY(1);
+    opacity: .8
+}
+
+/* 上下两边 -> 中间 */
+.fade-m-in:before {
+    transform-origin: 50% 0;
+    transform: scaleY(0)
+}
+
+
+.fade-m-in:after {
+    transform-origin: 50% 100%;
+    transform: scaleY(0)
+}
+
+.fade-m-in:hover::before, .fade-m-in:hover::after {
+    opacity: .8;
+    transform: scaleY(0.5)
+}
+
+/* left -> right */
+.fade-left:before {
+    transform-origin: 0 50%;
+    transform: scaleX(0)
+}
+
+.fade-left:hover:before {
+    opacity: 0.8;
+    transform: scaleX(1)
+}
+
+/* 带变化曲线的变化 */
+
+.bounce-top::before {
+    transition-timing-function: cubic-bezier(0.52, 1.7, 0.5, 0.4);
+    transform-origin: 50% 0;
+    transform: scaleX(0)
+}
+
+.bounce-top:hover:before {
+    opacity: .8;
+    transform: scaleY(1)
+}
+
+/* ==== 边框线条 ====*/
+
+.overline-left:before, .overline-m::before, .overline-m::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 4px;
+    background: green;
+    transition: all 0.3s;
+    transform: scaleX(0)
+}
+
+/* 顶部 left -> right */
+
+.overline-left:before {
+    transform-origin: 0% 50%;
+}
+
+.overline-left:hover:before {
+    transform-origin: 0% 50%;
+    transform: scaleX(1)
+}
+
+/* 顶部 中间 -> 两端 */
+.overline-m::before {
+    transform-origin: 0 50%;
+}
+
+.overline-m::after {
+    transform-origin: 100% 50%;
+}
+
+.overline-m:hover::before, .overline-m:hover::after {
+    transform: scaleX(0.5)
+}
+
+/* ==== 闪烁效果 ==== */
+@keyframes flash {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+.flash-box:hover {
+    animation: flash .5s ease-in;
+}
+
+/* ==== 闹钟晃动效果 ==== */
+@keyframes shake {
+    0%, 25%, 50%, 75%, 100% {
+        transform: rotate(0)
+    }
+    12.5%, 62.5% {
+        transform: rotate(-5deg)
+    }
+    37.5%, 87.5% {
+        transform: rotate(5deg)
+    }
+}
+
+.shake-box:hover {
+    animation: shake 0.5s ease
+}
+
+/* 左右抖动效果 */
+@keyframes shake-l-r {
+    0%, 25%, 50%, 75%, 100% {
+        transform: translate(0)
+    }
+    12.5%, 62.5% {
+        transform: translate(-10px)
+    }
+    37.5%, 87.5% {
+        transform: translate(10px)
+    }
+}
+
+.shake-l-r-box:hover {
+    animation: shake-l-r 0.5s ease;
+}
+
+/* 上下抖动效果 */
+@keyframes shake-t-b {
+    0%, 25%, 50%, 75%, 100% {
+        transform: translateY(0)
+    }
+    12.5%, 62.5% {
+        transform: translateY(-10px)
+    }
+    37.5%, 87.5% {
+        transform: translateY(10px)
+    }
+}
+
+.shake-t-b-box:hover {
+    animation: shake-t-b 0.5s ease;
+}
+
+/* 左右摇摆效果 */
+@keyframes wobble {
+    0%, 25%, 50%, 75%, 100% {
+        transform: skew(0)
+    }
+    12.5%, 62.5% {
+        transform: skew(-10deg)
+    }
+    37.5%, 87.5% {
+        transform: skew(10deg)
+    }
+}
+
+.wobble-box:hover {
+    /* 固定底部摇摆 */
+    transform-origin: 0% 100%;  
+    /* 固定顶部摇摆 */
+    /* transform-origin: 0% 0%;   */
+    animation: wobble 0.5s ease;
+}
